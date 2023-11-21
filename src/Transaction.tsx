@@ -1,4 +1,4 @@
-import { useWeb3ModalProvider } from '@web3modal/ethers-5/react'
+import { useWeb3ModalSigner } from '@web3modal/ethers5/react'
 import { ethers } from 'ethers'
 import React from 'react'
 
@@ -10,7 +10,7 @@ type Props = {
 const tokenAbi = ["function approve(address spender, uint256 amount) external returns (bool)"]
 const Transaction = ({address, chain}: Props) => {
 
-  const { provider } = useWeb3ModalProvider()
+  const { walletProvider:provider } = useWeb3ModalSigner()
 
   async function transaction(){
     const signer = provider?.getSigner()

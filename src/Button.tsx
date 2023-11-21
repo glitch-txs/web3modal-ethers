@@ -1,8 +1,8 @@
-import { useWeb3ModalAccount, useWeb3ModalProvider } from '@web3modal/ethers-5/react'
+import { useWeb3ModalAccount, useWeb3ModalSigner } from '@web3modal/ethers5/react'
 
 export function EthersConnectButton() {
   const { isConnected, address } = useWeb3ModalAccount()
-  const { provider } = useWeb3ModalProvider()
+  const { walletProvider: provider } = useWeb3ModalSigner()
 
   console.log("provider", provider)
   console.log("Connected",isConnected)

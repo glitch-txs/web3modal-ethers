@@ -1,11 +1,11 @@
-import { useWeb3ModalProvider } from '@web3modal/ethers-5/react'
+import { useWeb3ModalSigner } from '@web3modal/ethers5/react'
 import React from 'react'
 
 type Props = {}
 
 const Block = (props: Props) => {
   
-  const { provider } = useWeb3ModalProvider()
+  const { walletProvider: provider } = useWeb3ModalSigner()
   
   async function getBlock(){
     if(!provider)throw Error("provider is undefined")

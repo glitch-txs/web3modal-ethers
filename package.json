@@ -13,7 +13,7 @@
     "@types/react": "18.2.28",
     "@types/react-dom": "18.2.13",
     "@walletconnect/modal": "^2.6.2",
-    "@web3modal/ethers-5": "^3.2.0-e4fde44",
+    "@web3modal/ethers5": "^3.3.2",
     "eslint": "8.51.0",
     "eslint-config-next": "13.5.4",
     "ethers": "^5.7.2",
