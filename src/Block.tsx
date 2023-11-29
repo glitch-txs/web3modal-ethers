@@ -1,23 +1,20 @@
-import { useWeb3ModalSigner } from '@web3modal/ethers5/react'
-import React from 'react'
+import { useWeb3ModalProvider } from '@web3modal/ethers/react'
+import { BrowserProvider } from 'ethers'
 
-type Props = {}
-
-const Block = (props: Props) => {
-  
-  const { walletProvider: provider } = useWeb3ModalSigner()
+const Block = () => {
+  const { walletProvider } = useWeb3ModalProvider()
   
   async function getBlock(){
-    if(!provider)throw Error("provider is undefined")
-
-    const block = await provider.getBlockNumber()
+    if(!walletProvider) throw Error("User disconnected")
+    const ethersProvider =  new BrowserProvider(walletProvider)
+    const block = await ethersProvider.getBlockNumber()
     console.log("block", block)
   }
 
   async function gas(){
-    if(!provider)throw Error("provider is undefined")
-
-    const estimate = await provider.estimateGas({
+    if(!walletProvider) throw Error("User disconnected")
+    const ethersProvider =  new BrowserProvider(walletProvider)
+    const estimate = await ethersProvider.estimateGas({
       "from": "0x8D97689C9818892B700e27F316cc3E41e17fBeb9",
       "to": "0xd3CdA913deB6f67967B99D67aCDFa1712C293601",
       "value": "0x186a0",

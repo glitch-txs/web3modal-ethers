@@ -1,7 +1,6 @@
 import '@/styles/globals.css'
 import type { AppProps } from 'next/app'
-import { createWeb3Modal, defaultConfig } from '@web3modal/ethers5/react'
-import { useEffect } from 'react'
+import { createWeb3Modal, defaultConfig } from '@web3modal/ethers/react'
 
 const projectId = 'bd4997ce3ede37c95770ba10a3804dad'
 

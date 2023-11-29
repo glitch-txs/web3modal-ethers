@@ -1,15 +1,18 @@
-import { useWeb3ModalAccount, useWeb3ModalSigner } from '@web3modal/ethers5/react'
+import { useWeb3ModalAccount, useWeb3ModalProvider } from '@web3modal/ethers/react'
+import { BrowserProvider } from 'ethers'
 
 export function EthersConnectButton() {
   const { isConnected, address } = useWeb3ModalAccount()
-  const { walletProvider: provider } = useWeb3ModalSigner()
+  const { walletProvider } = useWeb3ModalProvider()
 
-  console.log("provider", provider)
+  console.log("provider", walletProvider)
   console.log("Connected",isConnected)
 
   async function onSignMessage() {
     try {
-      const signer = provider?.getSigner()
+      if(!walletProvider) throw Error("User disconnected")
+      const ethersProvider =  new BrowserProvider(walletProvider)
+      const signer = await ethersProvider.getSigner()
 
       const signature = await signer?.signMessage('Hello Web3Modal Ethers')
       console.log(signature)

@@ -1,6 +1,5 @@
-import { useWeb3ModalSigner } from '@web3modal/ethers5/react'
-import { ethers } from 'ethers'
-import React from 'react'
+import { useWeb3ModalProvider } from '@web3modal/ethers/react'
+import { BrowserProvider, Contract } from 'ethers'
 
 type Props = {
   address: string
@@ -10,11 +9,13 @@ type Props = {
 const tokenAbi = ["function approve(address spender, uint256 amount) external returns (bool)"]
 const Transaction = ({address, chain}: Props) => {
 
-  const { walletProvider:provider } = useWeb3ModalSigner()
+  const { walletProvider } = useWeb3ModalProvider()
 
   async function transaction(){
-    const signer = provider?.getSigner()
-    const contract = new ethers.Contract(address, tokenAbi, signer)
+    if(!walletProvider) throw Error("User disconnected")
+    const ethersProvider =  new BrowserProvider(walletProvider)
+    const signer = await ethersProvider.getSigner()
+    const contract = new Contract(address, tokenAbi, signer)
     const receipt = await contract.approve(address, 0)
     console.log(receipt)
   }
